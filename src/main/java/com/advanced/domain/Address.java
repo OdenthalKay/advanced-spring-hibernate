@@ -15,6 +15,9 @@ public class Address {
 	@Column
 	private String street;
 
+	public Address() {
+	}
+
 	public Address(String zip_code, String street) {
 		this.zip_code = zip_code;
 		this.street = street;

@@ -23,6 +23,11 @@ public class PersonService implements IPersonService {
 		personDao.save(person);
 	}
 
+	@Transactional
+	public Person getPersonById(int id) {
+		return personDao.getPersonById(id);
+	}
+
 	@Override
 	public String toString() {
 		return "PersonService [personDao=" + personDao + "]";

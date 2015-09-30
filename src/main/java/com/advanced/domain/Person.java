@@ -1,10 +1,18 @@
 package com.advanced.domain;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 
+import org.hibernate.engine.internal.Cascade;
+import org.hibernate.engine.spi.CascadeStyle;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -12,10 +20,13 @@ import org.springframework.transaction.annotation.Transactional;
 @Transactional(readOnly = true)
 @Entity
 public class Person {
-	@Id @GeneratedValue
+	@Id
+	@GeneratedValue
 	private int id;
 	@Column
 	private String fullname;
+	@OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+	private List<Address> addresses = new ArrayList<Address>();
 
 	public Person() {
 	}
@@ -38,6 +49,19 @@ public class Person {
 
 	public void setFullname(String fullname) {
 		this.fullname = fullname;
+	}
+
+	public List<Address> getAddresses() {
+		return addresses;
+	}
+
+	public void setAddresses(List<Address> addresses) {
+		this.addresses = addresses;
+	}
+
+	@Override
+	public String toString() {
+		return "Person [id=" + id + ", fullname=" + fullname + ", addresses=" + addresses + "]";
 	}
 
 }
