@@ -16,8 +16,7 @@ import org.hibernate.engine.spi.CascadeStyle;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
-@Repository
-@Transactional(readOnly = true)
+
 @Entity
 public class Person {
 	@Id
@@ -26,7 +25,7 @@ public class Person {
 	@Column
 	private String fullname;
 	@OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
-	private List<Address> addresses = new ArrayList<Address>();
+	private List<Address> addresses;
 
 	public Person() {
 	}
